@@ -64,3 +64,131 @@ resource "azurerm_automation_schedule" "this" {
 
   depends_on = [azurerm_automation_account.this]
 }
+
+###
+# Automation account job schedule
+###
+
+resource "azurerm_automation_job_schedule" "this" {
+  count = var.enabled && var.automation_account_job_enabled ? var.automation_account_job_count : 0
+
+  resource_group_name     = var.resource_group_name
+  automation_account_name = var.automation_account_exist == false ? element(concat(azurerm_automation_account.this.*.name, list("")), 0) : element(var.existing_automation_account_names, count.index)
+  runbook_name            = element(var.automation_account_job_runbokk_names, count.index)
+  parameters              = element(var.automation_account_job_parameters, count.index)
+  run_on                  = element(var.automation_account_job_run_on, count.index)
+}
+
+###
+# Automation module
+###
+
+resource "azurerm_automation_module" "this_module" {
+  count = var.enabled && var.automation_module_enabled ? length(var.automation_module_names) : 0
+
+  name                    = element(var.automation_module_names, count.index)
+  resource_group_name     = var.resource_group_name
+  automation_account_name = var.automation_account_exist == false ? element(concat(azurerm_automation_account.this.*.name, list("")), 0) : element(var.existing_automation_account_names, count.index)
+
+  dynamic "module_link" {
+    for_each = element(var.module_link_uri, count.index) != null ? [1] : []
+
+    content {
+      uri = element(var.module_link_uri, count.index)
+    }
+  }
+}
+
+###
+# Automation account runbook
+###
+
+resource "azurerm_automation_runbook" "this_runbook" {
+  count = var.enabled && var.automation_account_runbook_enabled ? length(var.automation_account_runbook_names) : 0
+
+  name                    = element(var.automation_account_runbook_names, count.index)
+  resource_group_name     = var.resource_group_name
+  location                = var.location
+  automation_account_name = var.automation_account_exist == false ? element(concat(azurerm_automation_account.this.*.name, list("")), 0) : element(var.existing_automation_account_names, count.index)
+  runbook_type            = element(var.automation_account_runbook_types, count.index)
+  log_progress            = element(var.automation_account_runbook_log_progress, count.index)
+  log_verbose             = element(var.automation_account_runbook_log_verbose, count.index)
+  description             = element(var.automation_account_runbook_descriptions, count.index)
+  content                 = element(var.automation_account_runbook_contents, count.index)
+
+  dynamic "publish_content_link" {
+    for_each = element(var.publish_content_link_uri, count.index) != null ? [1] : []
+
+    content {
+      uri = element(var.publish_content_link_uri, count.index)
+    }
+  }
+
+  tags = merge(
+    var.tags,
+    var.automation_account_runbook_tags,
+    {
+      "Terraform" = "true"
+    }
+  )
+}
+
+###
+# Automation account variable bool
+###
+
+resource "azurerm_automation_variable_bool" "this_bool" {
+  count = var.enabled && var.automation_variable_bool_enabled ? length(var.automation_account_variable_bool_names) : 0
+
+  name                    = element(var.automation_account_variable_bool_names, count.index)
+  resource_group_name     = var.resource_group_name
+  automation_account_name = var.automation_account_exist == false ? element(concat(azurerm_automation_account.this.*.name, list("")), 0) : element(var.existing_automation_account_names, count.index)
+  description             = element(var.automation_account_variable_bool_descriptions, count.index)
+  encrypted               = element(var.automation_account_variable_bool_encryptions, count.index)
+  value                   = element(var.automation_account_variable_bool_values, count.index)
+}
+
+###
+# Automation account variable datetime
+###
+
+resource "azurerm_automation_variable_datetime" "this_datetime" {
+  count = var.enabled && var.automation_variable_datetime_enabled ? length(var.automation_account_variable_datetime_names) : 0
+
+  name                    = element(var.automation_account_variable_datetime_names, count.index)
+  resource_group_name     = var.resource_group_name
+  automation_account_name = var.automation_account_exist == false ? element(concat(azurerm_automation_account.this.*.name, list("")), 0) : element(var.existing_automation_account_names, count.index)
+  description             = element(var.automation_account_variable_datetime_descriptions, count.index)
+  encrypted               = element(var.automation_account_variable_datetime_encryptions, count.index)
+  value                   = element(var.automation_account_variable_datetime_values, count.index)
+}
+
+###
+# Automation account variable int
+###
+
+resource "azurerm_automation_variable_int" "this_int" {
+  count = var.enabled && var.automation_variable_int_enabled ? length(var.automation_account_variable_int_names) : 0
+
+  name                    = element(var.automation_account_variable_int_names, count.index)
+  resource_group_name     = var.resource_group_name
+  automation_account_name = var.automation_account_exist == false ? element(concat(azurerm_automation_account.this.*.name, list("")), 0) : element(var.existing_automation_account_names, count.index)
+  description             = element(var.automation_account_variable_int_descriptions, count.index)
+  encrypted               = element(var.automation_account_variable_int_encryptions, count.index)
+  value                   = element(var.automation_account_variable_int_values, count.index)
+}
+
+###
+# Automation account variable string
+###
+
+resource "azurerm_automation_variable_string" "this_string" {
+  count = var.enabled && var.automation_variable_string_enabled ? length(var.automation_account_variable_string_names) : 0
+
+  name                    = element(var.automation_account_variable_string_names, count.index)
+  resource_group_name     = var.resource_group_name
+  automation_account_name = var.automation_account_exist == false ? element(concat(azurerm_automation_account.this.*.name, list("")), 0) : element(var.existing_automation_account_names, count.index)
+  description             = element(var.automation_account_variable_string_descriptions, count.index)
+  encrypted               = element(var.automation_account_variable_string_encryptions, count.index)
+  value                   = element(var.automation_account_variable_string_values, count.index)
+}

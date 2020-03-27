@@ -47,6 +47,14 @@ See `examples` folders for usage of this module.
 |------|-------------|
 | automation\_account\_credential\_ids | IDs of the automation credentials. |
 | automation\_account\_id | ID of the automation account. |
+| automation\_account\_job\_ids | Ids of the automation job schedule. |
+| automation\_account\_job\_schedule\_ids | The UUID identifying the automation job schedule. |
+| automation\_account\_runbook\_ids | IDs of the automation account runbook. |
+| automation\_account\_var\_bool\_ids | IDs of the automation account account variable bool. |
+| automation\_account\_var\_datetime\_ids | Id of the automation acount variable date-time. |
+| automation\_account\_var\_int\_ids | Id of the automation acount variable int. |
+| automation\_account\_var\_string\_ids | Id of the automation acount variable string. |
+| automation\_module\_ids | IDs of the automation module. |
 | automation\_schedule\_ids | IDs of the automation schedules. |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
