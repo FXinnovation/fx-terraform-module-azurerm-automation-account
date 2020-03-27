@@ -163,3 +163,107 @@ variable "monthly_occurrences" {
   type        = list(number)
   default     = [1]
 }
+
+###
+# Automation account job schedule
+###
+
+variable "automation_account_job_enabled" {
+  description = "Boolean flag which describes whether or not enable the automation job schedule resource."
+  default     = false
+}
+
+variable "automation_account_job_runbook_names" {
+  description = "List of names of a runbook to link to a Schedule. It needs to be in the same automation account as the schedule and job schedule. Changing this forces a new resource to be created. If enabled this value is `Rquired`."
+  type        = list(string)
+  default     = [""]
+}
+
+variable "automation_account_job_parameters" {
+  description = "List of key/value pairs corresponding to the arguments that can be passed to the runbook. `NOTE: The parameter keys/names must strictly be in lowercase, even if this is not the case in the runbook. This is due to a limitation in Azure automation where the parameter names are normalized. The values specified don't have this limitation.` Changing this forces a new resource to be created."
+  type        = list(map)
+  default     = []
+}
+
+variable "automation_account_job_run_on" {
+  description = "List of names of ybrid worker group the runbook will be executed on. Changing this forces a new resource to be created."
+  type        = list(string)
+  default     = [""]
+}
+
+###
+# Automation module
+###
+
+variable "automation_module_enabled" {
+  description = "Boolean flag which describes whether or not enable the automation module resource."
+  default     = false
+}
+
+variable "automation_module_names" {
+  description = "The list which describes the names of the automation module. Changing this force a new resource to be created."
+  type        = list(string)
+  default     = [""]
+}
+
+variable "module_link_uri" {
+  description = "The list of published module link uri of te module content (zip or nupkg).If enabled this value is `Required`."
+  type        = list(string)
+  default     = [""]
+}
+
+###
+# Automation account runbook
+###
+
+variable "automation_account_runbook_enabled" {
+  description = "Boolean flag which describes whether or not enable the automation runbook resource."
+  default     = false
+}
+
+variable "automation_account_runbook_names" {
+  description = "The list of names of the runbook . Changing this forces a new resource to be created. If enabled this value is `Required`."
+  type        = list(string)
+  default     = [""]
+}
+
+variable "automation_account_runbook_types" {
+  description = "The list which describes the type of the runbook can be either `Graph`, `GraphPowerShell`, `GraphPowerShellWorkflow`, `PowerShellWorkflow`, `PowerShell` or `Script`. If enabled this value is `Required`."
+  type        = list(string)
+  default     = [""]
+}
+
+variable "automation_account_runbook_log_progress" {
+  description = "The list of boolean flag which the whether to have log options or not. If enabled this value is `Required`."
+  type        = list(bool)
+  default     = [false]
+}
+
+variable "automation_account_runbook_log_verbose" {
+  description = "The list of boolean flag which describes whether to have versbose log option or not. If enabled this value is `Required`."
+  type        = list(bool)
+  default     = [false]
+}
+
+variable "automation_account_runbook_descriptions" {
+  description = "The list of descriptions which will be associated to the credentials."
+  type        = list(string)
+  default     = [""]
+}
+
+variable "automation_account_runbook_log_contents" {
+  description = "The list of desired content of the runbook. `NOTE: The Azure API requires a `publish_content_link` to be supplied even when specifying your own `content` & setting `content` to an empty string will revert the runbook to the `publish_content_link`."
+  type        = list(string)
+  default     = [""]
+}
+
+variable "publish_content_link_uri" {
+  description = "The list of uri of the runbook content. If enabled this value is `Required."
+  type        = list(string)
+  default     = [null]
+}
+
+variable "automation_account_runbook_tags" {
+  description = "Thag which willl be associated to the automation account runbook resource."
+  default     = {}
+}

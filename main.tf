@@ -74,7 +74,7 @@ resource "azurerm_automation_job_schedule" "this" {
 
   resource_group_name     = var.resource_group_name
   automation_account_name = var.automation_account_exist == false ? element(concat(azurerm_automation_account.this.*.name, list("")), 0) : element(var.existing_automation_account_names, count.index)
-  runbook_name            = element(var.automation_account_job_runbokk_names, count.index)
+  runbook_name            = element(var.automation_account_job_runbook_names, count.index)
   parameters              = element(var.automation_account_job_parameters, count.index)
   run_on                  = element(var.automation_account_job_run_on, count.index)
 }
