@@ -7,7 +7,7 @@ resource "azurerm_automation_account" "this" {
 
   name                = var.automation_account_name
   resource_group_name = var.resource_group_name
-  location            = var.automation_account_location
+  location            = var.location
   sku_name            = var.automation_account_sku_name
 
   tags = merge(
@@ -31,7 +31,7 @@ resource "azurerm_automation_credential" "this" {
   automation_account_name = var.automation_account_exist == false ? element(concat(azurerm_automation_account.this.*.name, list("")), 0) : element(var.existing_automation_account_names, count.index)
   username                = element(var.automation_account_credential_usernames, count.index)
   password                = element(var.automation_account_credential_passwords, count.index)
-  description             = element(var.automation_account_credential_description, count.index)
+  description             = element(var.automation_account_credential_descriptions, count.index)
 }
 
 ###
@@ -50,11 +50,11 @@ resource "azurerm_automation_schedule" "this" {
   start_time              = element(var.automation_account_schedule_start_times, count.index)
   expiry_time             = element(var.automation_account_schedule_expiry_times, count.index)
   timezone                = element(var.automation_account_schedule_timezones, count.index)
-  weekdays                = lement(var.automation_account_schedule_frequencies, count.index) == "Week" ? element(var.automation_account_schedule_weekdays, count.index) : null
+  week_days               = element(var.automation_account_schedule_frequencies, count.index) == "Week" ? element(var.automation_account_schedule_weekdays, count.index) : null
   month_days              = element(var.automation_account_schedule_frequencies, count.index) == "Month" ? element(var.automation_account_schedule_month_days, count.index) : null
 
   dynamic "monthly_occurrence" {
-    for_each = element(var.automation_account_schedule_frequencies, count.index) == "Month"
+    for_each = element(var.automation_account_schedule_frequencies, count.index) == "Month" ? [1] : []
 
     content {
       day        = element(var.monthly_occurrence_day, count.index)
@@ -70,8 +70,9 @@ resource "azurerm_automation_schedule" "this" {
 ###
 
 resource "azurerm_automation_job_schedule" "this" {
-  count = var.enabled && var.automation_account_job_enabled ? var.automation_account_job_count : 0
+  count = var.enabled && var.automation_account_job_enabled ? length(var.automation_account_job_schedule_names) : 0
 
+  schedule_name           = element(var.automation_account_job_schedule_names, count.index)
   resource_group_name     = var.resource_group_name
   automation_account_name = var.automation_account_exist == false ? element(concat(azurerm_automation_account.this.*.name, list("")), 0) : element(var.existing_automation_account_names, count.index)
   runbook_name            = element(var.automation_account_job_runbook_names, count.index)
@@ -106,15 +107,15 @@ resource "azurerm_automation_module" "this_module" {
 resource "azurerm_automation_runbook" "this_runbook" {
   count = var.enabled && var.automation_account_runbook_enabled ? length(var.automation_account_runbook_names) : 0
 
-  name                    = element(var.automation_account_runbook_names, count.index)
-  resource_group_name     = var.resource_group_name
-  location                = var.location
-  automation_account_name = var.automation_account_exist == false ? element(concat(azurerm_automation_account.this.*.name, list("")), 0) : element(var.existing_automation_account_names, count.index)
-  runbook_type            = element(var.automation_account_runbook_types, count.index)
-  log_progress            = element(var.automation_account_runbook_log_progress, count.index)
-  log_verbose             = element(var.automation_account_runbook_log_verbose, count.index)
-  description             = element(var.automation_account_runbook_descriptions, count.index)
-  content                 = element(var.automation_account_runbook_contents, count.index)
+  name                = element(var.automation_account_runbook_names, count.index)
+  resource_group_name = var.resource_group_name
+  location            = var.location
+  account_name        = var.automation_account_exist == false ? element(concat(azurerm_automation_account.this.*.name, list("")), 0) : element(var.existing_automation_account_names, count.index)
+  runbook_type        = element(var.automation_account_runbook_types, count.index)
+  log_progress        = element(var.automation_account_runbook_log_progress, count.index)
+  log_verbose         = element(var.automation_account_runbook_log_verbose, count.index)
+  description         = element(var.automation_account_runbook_descriptions, count.index)
+  content             = element(var.automation_account_runbook_contents, count.index)
 
   dynamic "publish_content_link" {
     for_each = element(var.publish_content_link_uri, count.index) != null ? [1] : []

@@ -13,6 +13,12 @@ variable "resource_group_name" {
   default     = ""
 }
 
+variable "location" {
+  description = "Specifies the supported Azure location where the resourceexists. Changing this forces a new resource to be created.If enabled value is `Required`."
+  type        = string
+  default     = ""
+}
+
 variable "tags" {
   description = "Tags shared by all resources of this module. Will be merged with any other specific tags by resource."
   default     = {}
@@ -35,12 +41,6 @@ variable "existing_automation_account_names" {
 
 variable "automation_account_name" {
   description = "Specifies the name of the Automation Account. Changing this forces a new resource to be created. If enabled value is `Required`"
-  type        = string
-  default     = ""
-}
-
-variable "automation_account_location" {
-  description = "Specifies the supported Azure location where the resourceexists. Changing this forces a new resource to be created.If enabled value is `Required`."
   type        = string
   default     = ""
 }
@@ -173,6 +173,12 @@ variable "automation_account_job_enabled" {
   default     = false
 }
 
+variable "automation_account_job_schedule_names" {
+  description = "List of names of the automation job schedules. Chaging this forces a new resource to be created. if enabled this value is `Required`."
+  type        = list(string)
+  default     = [""]
+}
+
 variable "automation_account_job_runbook_names" {
   description = "List of names of a runbook to link to a Schedule. It needs to be in the same automation account as the schedule and job schedule. Changing this forces a new resource to be created. If enabled this value is `Rquired`."
   type        = list(string)
@@ -181,7 +187,7 @@ variable "automation_account_job_runbook_names" {
 
 variable "automation_account_job_parameters" {
   description = "List of key/value pairs corresponding to the arguments that can be passed to the runbook. `NOTE: The parameter keys/names must strictly be in lowercase, even if this is not the case in the runbook. This is due to a limitation in Azure automation where the parameter names are normalized. The values specified don't have this limitation.` Changing this forces a new resource to be created."
-  type        = list(map)
+  type        = list(object({}))
   default     = []
 }
 
@@ -251,7 +257,7 @@ variable "automation_account_runbook_descriptions" {
   default     = [""]
 }
 
-variable "automation_account_runbook_log_contents" {
+variable "automation_account_runbook_contents" {
   description = "The list of desired content of the runbook. `NOTE: The Azure API requires a `publish_content_link` to be supplied even when specifying your own `content` & setting `content` to an empty string will revert the runbook to the `publish_content_link`."
   type        = list(string)
   default     = [""]
