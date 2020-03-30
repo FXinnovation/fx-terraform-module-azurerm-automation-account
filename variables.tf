@@ -267,3 +267,135 @@ variable "automation_account_runbook_tags" {
   description = "Thag which willl be associated to the automation account runbook resource."
   default     = {}
 }
+
+###
+# Automation account variable bool
+###
+
+variable "automation_variable_bool_enabled" {
+  description = "Boolean flag which describes whether or not to enable the resource."
+  default     = false
+}
+
+variable "automation_account_variable_bool_names" {
+  description = "List which specifies the names of automation bool variable. Changing this forces a new resource to be created. If enabled this value is `Required`."
+  type        = list(string)
+  default     = [""]
+}
+
+variable "automation_account_variable_bool_descriptions" {
+  description = " List of description of the automation bool variable."
+  type        = list(string)
+  default     = [""]
+}
+
+variable "automation_account_variable_bool_encryptions" {
+  description = "List which specifies if the automation bool variable is encrypted. Defaults to `false`."
+  type        = list(bool)
+  default     = [false]
+}
+
+variable "automation_account_variable_bool_values" {
+  description = "The list of values of automation bool variable as `boolean`."
+  type        = list(bool)
+  default     = [false]
+}
+
+###
+# Automation account variable datetime
+###
+
+variable "automation_variable_datetime_enabled" {
+  description = "Boolean flag which describes whether or not to enable the resource."
+  default     = false
+}
+
+variable "automation_account_variable_datetime_names" {
+  description = "List which specifies the names of automation datetime variable. Changing this forces a new resource to be created. If enabled this value is `Required`."
+  type        = list(string)
+  default     = [""]
+}
+
+variable "automation_account_variable_datetime_descriptions" {
+  description = " List of description of the automation datetime variable."
+  type        = list(string)
+  default     = [""]
+}
+
+variable "automation_account_variable_datetime_encryptions" {
+  description = "List which specifies if the automation datetime variable is encrypted. Defaults to `false`."
+  type        = list(bool)
+  default     = [false]
+}
+
+variable "automation_account_variable_datetime_values" {
+  description = "The list of values of automation datetime variable in the RFC3339 Section 5.6 Internet Date/Time Format. https://tools.ietf.org/html/rfc3339#section-5.6 "
+  type        = list(string)
+  default     = [""]
+}
+
+###
+# Automation account variable int
+###
+
+variable "automation_variable_int_enabled" {
+  description = "Boolean flag which describes whether or not to enable the resource."
+  default     = false
+}
+
+variable "automation_account_variable_int_names" {
+  description = "List which specifies the names of automation int variable. Changing this forces a new resource to be created. If enabled this value is `Required`."
+  type        = list(string)
+  default     = [""]
+}
+
+variable "automation_account_variable_int_descriptions" {
+  description = " List of description of the automation int variable."
+  type        = list(string)
+  default     = [""]
+}
+
+variable "automation_account_variable_int_encryptions" {
+  description = "List which specifies if the automation int variable is encrypted. Defaults to `false`."
+  type        = list(bool)
+  default     = [false]
+}
+
+variable "automation_account_variable_int_values" {
+  description = "The list of values of automation int variable as `Integer`."
+  type        = list(number)
+  default     = [1234]
+}
+
+###
+# Automation account variable string
+###
+
+variable "automation_variable_string_enabled" {
+  description = "Boolean flag which describes whether or not to enable the resource."
+  default     = false
+}
+
+variable "automation_account_variable_string_names" {
+  description = "List which specifies the names of automation string variable. Changing this forces a new resource to be created. If enabled this value is `Required`."
+  type        = list(string)
+  default     = [""]
+}
+
+variable "automation_account_variable_string_descriptions" {
+  description = " List of description of the automation string variable."
+  type        = list(string)
+  default     = [""]
+}
+
+variable "automation_account_variable_string_encryptions" {
+  description = "List which specifies if the automation string variable is encrypted. Defaults to `false`."
+  type        = list(bool)
+  default     = [false]
+}
+
+variable "automation_account_variable_string_values" {
+  description = "The list of values of automation string variable as `String`."
+  type        = list(string)
+  default     = ["Terraform"]
+}

@@ -44,10 +44,30 @@ See `examples` folders for usage of this module.
 | automation\_account\_schedule\_weekdays | List of days of the week that the job should execute on. Only valid when frequency is `Week`. | `list(list(string))` | `[]` | no |
 | automation\_account\_sku\_name | The SKU name of the account - only `Basic` is supported at this time. | `string` | `"Basic"` | no |
 | automation\_account\_tags | Tags which will be associated to the automation account | `map` | `{}` | no |
+| automation\_account\_variable\_bool\_descriptions | List of description of the automation bool variable. | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
+| automation\_account\_variable\_bool\_encryptions | List which specifies if the automation bool variable is encrypted. Defaults to `false`. | `list(bool)` | <pre>[<br>  false<br>]</pre> | no |
+| automation\_account\_variable\_bool\_names | List which specifies the names of automation bool variable. Changing this forces a new resource to be created. If enabled this value is `Required`. | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
+| automation\_account\_variable\_bool\_values | The list of values of automation bool variable as `boolean`. | `list(bool)` | <pre>[<br>  false<br>]</pre> | no |
+| automation\_account\_variable\_datetime\_descriptions | List of description of the automation datetime variable. | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
+| automation\_account\_variable\_datetime\_encryptions | List which specifies if the automation datetime variable is encrypted. Defaults to `false`. | `list(bool)` | <pre>[<br>  false<br>]</pre> | no |
+| automation\_account\_variable\_datetime\_names | List which specifies the names of automation datetime variable. Changing this forces a new resource to be created. If enabled this value is `Required`. | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
+| automation\_account\_variable\_datetime\_values | The list of values of automation datetime variable in the RFC3339 Section 5.6 Internet Date/Time Format. https://tools.ietf.org/html/rfc3339#section-5.6 | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
+| automation\_account\_variable\_int\_descriptions | List of description of the automation int variable. | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
+| automation\_account\_variable\_int\_encryptions | List which specifies if the automation int variable is encrypted. Defaults to `false`. | `list(bool)` | <pre>[<br>  false<br>]</pre> | no |
+| automation\_account\_variable\_int\_names | List which specifies the names of automation int variable. Changing this forces a new resource to be created. If enabled this value is `Required`. | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
+| automation\_account\_variable\_int\_values | The list of values of automation int variable as `Integer`. | `list(number)` | <pre>[<br>  1234<br>]</pre> | no |
+| automation\_account\_variable\_string\_descriptions | List of description of the automation string variable. | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
+| automation\_account\_variable\_string\_encryptions | List which specifies if the automation string variable is encrypted. Defaults to `false`. | `list(bool)` | <pre>[<br>  false<br>]</pre> | no |
+| automation\_account\_variable\_string\_names | List which specifies the names of automation string variable. Changing this forces a new resource to be created. If enabled this value is `Required`. | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
+| automation\_account\_variable\_string\_values | The list of values of automation string variable as `String`. | `list(string)` | <pre>[<br>  "Terraform"<br>]</pre> | no |
 | automation\_credential\_enabled | Boolean flag which describes whether to enable the automation crdentials resource or not. | `bool` | `false` | no |
 | automation\_credential\_names | List of names of the Credential. Changing this forces a new resource to be created. If enabled this value is `Required`. | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
 | automation\_module\_enabled | Boolean flag which describes whether or not enable the automation module resource. | `bool` | `false` | no |
 | automation\_module\_names | The list which describes the names of the automation module. Changing this force a new resource to be created. | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
+| automation\_variable\_bool\_enabled | Boolean flag which describes whether or not to enable the resource. | `bool` | `false` | no |
+| automation\_variable\_datetime\_enabled | Boolean flag which describes whether or not to enable the resource. | `bool` | `false` | no |
+| automation\_variable\_int\_enabled | Boolean flag which describes whether or not to enable the resource. | `bool` | `false` | no |
+| automation\_variable\_string\_enabled | Boolean flag which describes whether or not to enable the resource. | `bool` | `false` | no |
 | enabled | Enable or diasble module. | `bool` | `true` | no |
 | existing\_automation\_account\_names | List of names of the existing automation account names to which the credentials will be created. If `utomation_account_exist` is enabled then this value is `Required`. | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
 | module\_link\_uri | The list of published module link uri of te module content (zip or nupkg).If enabled this value is `Required`. | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
