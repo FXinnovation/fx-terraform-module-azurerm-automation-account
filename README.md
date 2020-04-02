@@ -35,7 +35,7 @@ See `examples` folders for usage of this module.
 | automation\_account\_runbook\_types | The list which describes the type of the runbook can be either `Graph`, `GraphPowerShell`, `GraphPowerShellWorkflow`, `PowerShellWorkflow`, `PowerShell` or `Script`. If enabled this value is `Required`. | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
 | automation\_account\_schedule\_descriptions | The list of descriptions for this schedule. | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
 | automation\_account\_schedule\_enabled | Boolean flag which describes whether or not enable the automation account schedule resource. | `bool` | `false` | no |
-| automation\_account\_schedule\_expiry\_times | The list of end times of the schedule. | `list(string)` | <pre>[<br>  "9999-04-31T18:30:00.00Z"<br>]</pre> | no |
+| automation\_account\_schedule\_expiry\_times | The list of end times of the schedule. | `list(string)` | <pre>[<br>  "2022-12-31T20:30:00.00Z"<br>]</pre> | no |
 | automation\_account\_schedule\_frequencies | Lis of  frequency of the schedule. - can be either `OneTime`, `Day`, `Hour`, `Week`, or `Month`.If enabled value id `Required`. | `list(string)` | <pre>[<br>  "Onetime"<br>]</pre> | no |
 | automation\_account\_schedule\_intervals | List of  number of frequencys between runs. Only valid when frequency is `Day`, `Hour`, `Week`, or `Month` and defaults to `1`. | `list(number)` | <pre>[<br>  1<br>]</pre> | no |
 | automation\_account\_schedule\_month\_days | List of days of the month that the job should execute on. Must be between `1` and `31`. `-1` for last day of the month. Only valid when frequency is `Month`. | `list(list(string))` | `[]` | no |
