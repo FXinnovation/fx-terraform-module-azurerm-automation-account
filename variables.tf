@@ -136,7 +136,7 @@ variable "automation_account_schedule_start_times" {
 variable "automation_account_schedule_expiry_times" {
   description = "The list of end times of the schedule."
   type        = list(string)
-  default     = []
+  default     = ["9999-04-31T18:30:00.00Z"]
 }
 
 variable "automation_account_schedule_timezones" {
