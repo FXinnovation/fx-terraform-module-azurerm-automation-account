@@ -28,8 +28,8 @@ module "example" {
   automation_account_schedule_frequencies  = ["Week"]
   automation_account_schedule_descriptions = ["test"]
   automation_account_schedule_intervals    = [1]
-  automation_account_schedule_start_times  = ["2020-04-15T18:30:00.00Z"]
-  automation_account_schedule_expiry_times = ["2020-04-15T20:30:00.00Z"]
+  automation_account_schedule_start_times  = ["2020-04-15T18:30:00Z"]
+  automation_account_schedule_expiry_times = ["2020-04-15T20:30:00Z"]
   automation_account_schedule_timezones    = ["UTC"]
   automation_account_schedule_weekdays     = [["Monday", "Friday"]]
 
