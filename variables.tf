@@ -193,13 +193,13 @@ variable "automation_account_job_runbook_names" {
 variable "automation_account_job_parameters" {
   description = "List of key/value pairs corresponding to the arguments that can be passed to the runbook. `NOTE: The parameter keys/names must strictly be in lowercase, even if this is not the case in the runbook. This is due to a limitation in Azure automation where the parameter names are normalized. The values specified don't have this limitation.` Changing this forces a new resource to be created."
   type        = list(object({}))
-  default     = []
+  default     = [null]
 }
 
 variable "automation_account_job_run_on" {
-  description = "List of names of ybrid worker group the runbook will be executed on. Changing this forces a new resource to be created."
+  description = "List of names of hybrid worker group the runbook will be executed on. Changing this forces a new resource to be created."
   type        = list(string)
-  default     = [""]
+  default     = [null]
 }
 
 ###
