@@ -32,9 +32,6 @@ module "example" {
   automation_account_schedule_timezones    = ["UTC"]
   automation_account_schedule_weekdays     = [["Monday", "Friday"]]
 
-  automation_account_job_enabled        = true
-  automation_account_job_schedule_names = ["tftest1${random_string.this.result}"]
-
   automation_variable_bool_enabled              = true
   automation_account_variable_bool_names        = ["tftest${random_string.this.result}"]
   automation_account_variable_bool_descriptions = ["Terraform test"]
