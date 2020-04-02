@@ -12,7 +12,10 @@ terraform destroy
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Providers
 
-No provider.
+| Name | Version |
+|------|---------|
+| azurerm | >= 2.0.0 |
+| random | n/a |
 
 ## Inputs
 
