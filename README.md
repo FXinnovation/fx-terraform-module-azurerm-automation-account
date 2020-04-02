@@ -17,6 +17,7 @@ See `examples` folders for usage of this module.
 | automation\_account\_credential\_descriptions | The list of descriptions associated with this automation account. | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
 | automation\_account\_credential\_passwords | the list of passowrds associated with this automation credentials. | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
 | automation\_account\_credential\_usernames | The list of usernames associated with this automation credentials. | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
+| automation\_account\_enabled | Boolean flga whoch describes whether or not enable the automation account resource. | `bool` | `false` | no |
 | automation\_account\_exist | Boolean flag which describes whether the automation account already exist to which credentials have to be created. | `bool` | `false` | no |
 | automation\_account\_job\_enabled | Boolean flag which describes whether or not enable the automation job schedule resource. | `bool` | `false` | no |
 | automation\_account\_job\_parameters | List of key/value pairs corresponding to the arguments that can be passed to the runbook. `NOTE: The parameter keys/names must strictly be in lowercase, even if this is not the case in the runbook. This is due to a limitation in Azure automation where the parameter names are normalized. The values specified don't have this limitation.` Changing this forces a new resource to be created. | `list(object({}))` | `[]` | no |
@@ -51,7 +52,7 @@ See `examples` folders for usage of this module.
 | automation\_account\_variable\_datetime\_descriptions | List of description of the automation datetime variable. | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
 | automation\_account\_variable\_datetime\_encryptions | List which specifies if the automation datetime variable is encrypted. Defaults to `false`. | `list(bool)` | <pre>[<br>  false<br>]</pre> | no |
 | automation\_account\_variable\_datetime\_names | List which specifies the names of automation datetime variable. Changing this forces a new resource to be created. If enabled this value is `Required`. | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
-| automation\_account\_variable\_datetime\_values | The list of values of automation datetime variable in the RFC3339 Section 5.6 Internet Date/Time Format. https://tools.ietf.org/html/rfc3339#section-5.6 | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
+| automation\_account\_variable\_datetime\_values | The list of values of automation datetime variable in the RFC3339 Section 5.6 Internet Date/Time Format. https://tools.ietf.org/html/rfc3339#section-5.6 | `list(string)` | <pre>[<br>  "2019-04-24T21:40:54.074Z"<br>]</pre> | no |
 | automation\_account\_variable\_int\_descriptions | List of description of the automation int variable. | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
 | automation\_account\_variable\_int\_encryptions | List which specifies if the automation int variable is encrypted. Defaults to `false`. | `list(bool)` | <pre>[<br>  false<br>]</pre> | no |
 | automation\_account\_variable\_int\_names | List which specifies the names of automation int variable. Changing this forces a new resource to be created. If enabled this value is `Required`. | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |

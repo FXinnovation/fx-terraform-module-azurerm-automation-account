@@ -3,7 +3,7 @@
 ###
 
 resource "azurerm_automation_account" "this" {
-  count = var.enabled ? 1 : 0
+  count = local.should_create_automation_account ? 1 : 0
 
   name                = var.automation_account_name
   resource_group_name = var.resource_group_name
@@ -24,7 +24,7 @@ resource "azurerm_automation_account" "this" {
 ###
 
 resource "azurerm_automation_credential" "this" {
-  count = var.enabled && var.automation_credential_enabled ? length(var.automation_credential_names) : 0
+  count = local.should_create_automation_credentials ? length(var.automation_credential_names) : 0
 
   name                    = element(var.automation_credential_names, count.index)
   resource_group_name     = var.resource_group_name
@@ -39,7 +39,7 @@ resource "azurerm_automation_credential" "this" {
 ###
 
 resource "azurerm_automation_schedule" "this" {
-  count = var.enabled && var.automation_account_schedule_enabled ? length(var.automation_account_schedule_names) : 0
+  count = local.should_create_automation_schedule ? length(var.automation_account_schedule_names) : 0
 
   name                    = element(var.automation_account_schedule_names, count.index)
   resource_group_name     = var.resource_group_name
@@ -70,7 +70,7 @@ resource "azurerm_automation_schedule" "this" {
 ###
 
 resource "azurerm_automation_job_schedule" "this" {
-  count = var.enabled && var.automation_account_job_enabled ? length(var.automation_account_job_schedule_names) : 0
+  count = local.should_create_automation_job_schedule ? length(var.automation_account_job_schedule_names) : 0
 
   schedule_name           = element(var.automation_account_job_schedule_names, count.index)
   resource_group_name     = var.resource_group_name
@@ -78,6 +78,8 @@ resource "azurerm_automation_job_schedule" "this" {
   runbook_name            = element(var.automation_account_job_runbook_names, count.index)
   parameters              = element(var.automation_account_job_parameters, count.index)
   run_on                  = element(var.automation_account_job_run_on, count.index)
+
+  depends_on = [azurerm_automation_schedule.this]
 }
 
 ###
@@ -85,7 +87,7 @@ resource "azurerm_automation_job_schedule" "this" {
 ###
 
 resource "azurerm_automation_module" "this_module" {
-  count = var.enabled && var.automation_module_enabled ? length(var.automation_module_names) : 0
+  count = local.should_create_automation_module ? length(var.automation_module_names) : 0
 
   name                    = element(var.automation_module_names, count.index)
   resource_group_name     = var.resource_group_name
@@ -105,17 +107,17 @@ resource "azurerm_automation_module" "this_module" {
 ###
 
 resource "azurerm_automation_runbook" "this_runbook" {
-  count = var.enabled && var.automation_account_runbook_enabled ? length(var.automation_account_runbook_names) : 0
+  count = local.should_create_automation_runbook ? length(var.automation_account_runbook_names) : 0
 
-  name                = element(var.automation_account_runbook_names, count.index)
-  resource_group_name = var.resource_group_name
-  location            = var.location
-  account_name        = var.automation_account_exist == false ? element(concat(azurerm_automation_account.this.*.name, list("")), 0) : element(var.existing_automation_account_names, count.index)
-  runbook_type        = element(var.automation_account_runbook_types, count.index)
-  log_progress        = element(var.automation_account_runbook_log_progress, count.index)
-  log_verbose         = element(var.automation_account_runbook_log_verbose, count.index)
-  description         = element(var.automation_account_runbook_descriptions, count.index)
-  content             = element(var.automation_account_runbook_contents, count.index)
+  name                    = element(var.automation_account_runbook_names, count.index)
+  resource_group_name     = var.resource_group_name
+  location                = var.location
+  automation_account_name = var.automation_account_exist == false ? element(concat(azurerm_automation_account.this.*.name, list("")), 0) : element(var.existing_automation_account_names, count.index)
+  runbook_type            = element(var.automation_account_runbook_types, count.index)
+  log_progress            = element(var.automation_account_runbook_log_progress, count.index)
+  log_verbose             = element(var.automation_account_runbook_log_verbose, count.index)
+  description             = element(var.automation_account_runbook_descriptions, count.index)
+  content                 = element(var.automation_account_runbook_contents, count.index)
 
   dynamic "publish_content_link" {
     for_each = element(var.publish_content_link_uri, count.index) != null ? [1] : []
@@ -139,7 +141,7 @@ resource "azurerm_automation_runbook" "this_runbook" {
 ###
 
 resource "azurerm_automation_variable_bool" "this_bool" {
-  count = var.enabled && var.automation_variable_bool_enabled ? length(var.automation_account_variable_bool_names) : 0
+  count = local.should_create_automation_variable_bool ? length(var.automation_account_variable_bool_names) : 0
 
   name                    = element(var.automation_account_variable_bool_names, count.index)
   resource_group_name     = var.resource_group_name
@@ -154,7 +156,7 @@ resource "azurerm_automation_variable_bool" "this_bool" {
 ###
 
 resource "azurerm_automation_variable_datetime" "this_datetime" {
-  count = var.enabled && var.automation_variable_datetime_enabled ? length(var.automation_account_variable_datetime_names) : 0
+  count = local.should_create_automation_variable_datetime ? length(var.automation_account_variable_datetime_names) : 0
 
   name                    = element(var.automation_account_variable_datetime_names, count.index)
   resource_group_name     = var.resource_group_name
@@ -169,7 +171,7 @@ resource "azurerm_automation_variable_datetime" "this_datetime" {
 ###
 
 resource "azurerm_automation_variable_int" "this_int" {
-  count = var.enabled && var.automation_variable_int_enabled ? length(var.automation_account_variable_int_names) : 0
+  count = local.should_create_automation_variable_int ? length(var.automation_account_variable_int_names) : 0
 
   name                    = element(var.automation_account_variable_int_names, count.index)
   resource_group_name     = var.resource_group_name
@@ -184,7 +186,7 @@ resource "azurerm_automation_variable_int" "this_int" {
 ###
 
 resource "azurerm_automation_variable_string" "this_string" {
-  count = var.enabled && var.automation_variable_string_enabled ? length(var.automation_account_variable_string_names) : 0
+  count = local.should_create_automation_variable_string ? length(var.automation_account_variable_string_names) : 0
 
   name                    = element(var.automation_account_variable_string_names, count.index)
   resource_group_name     = var.resource_group_name

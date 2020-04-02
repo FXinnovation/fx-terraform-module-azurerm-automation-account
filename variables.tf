@@ -39,6 +39,11 @@ variable "existing_automation_account_names" {
 # Automation account
 ###
 
+variable "automation_account_enabled" {
+  description = "Boolean flga whoch describes whether or not enable the automation account resource."
+  default     = false
+}
+
 variable "automation_account_name" {
   description = "Specifies the name of the Automation Account. Changing this forces a new resource to be created. If enabled value is `Required`"
   type        = string
@@ -337,7 +342,7 @@ variable "automation_account_variable_datetime_encryptions" {
 variable "automation_account_variable_datetime_values" {
   description = "The list of values of automation datetime variable in the RFC3339 Section 5.6 Internet Date/Time Format. https://tools.ietf.org/html/rfc3339#section-5.6 "
   type        = list(string)
-  default     = [""]
+  default     = ["2019-04-24T21:40:54.074Z"]
 }
 
 ###
