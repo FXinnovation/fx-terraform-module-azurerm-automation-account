@@ -26,7 +26,7 @@ workflow Get-AzureVMTutorial
 
     #TODO (optional): pick the right subscription to use. Without this line, the default subscription for your Azure Account will be used.
     #Select-AzureSubscription -SubscriptionName "TODO: your Azure subscription name here"
-    
+
     #Get all the VMs you have in your Azure subscription
     $VMs = Get-AzureVM
 
