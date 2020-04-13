@@ -28,22 +28,22 @@ output "automation_account_runbook_ids" {
   value       = module.example.automation_account_runbook_ids
 }
 
-output "automation_var_bool_ids" {
+output "automation_variable_bool_ids" {
   description = "IDs of the automation account account variable bool."
   value       = module.example.automation_account_var_bool_ids
 }
 
-output "automation_var_datetime_ids" {
+output "automation_variable_datetime_ids" {
   description = "Id of the automation acount variable date-time."
   value       = module.example.automation_account_var_datetime_ids
 }
 
-output "automation_var_int_ids" {
+output "automation_variable_int_ids" {
   description = "Id of the automation acount variable int."
   value       = module.example.automation_account_var_int_ids
 }
 
-output "automation_var_string_ids" {
+output "automation_variable_string_ids" {
   description = "Id of the automation acount variable string."
   value       = module.example.automation_account_var_string_ids
 }

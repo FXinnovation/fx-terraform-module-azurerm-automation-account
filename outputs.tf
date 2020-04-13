@@ -48,7 +48,6 @@ output "automation_module_ids" {
   value       = compact(concat(azurerm_automation_module.this_module.*.id, [""]))
 }
 
-
 ###
 # Automation account runbook
 ###
