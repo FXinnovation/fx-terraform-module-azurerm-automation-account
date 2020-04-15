@@ -69,7 +69,7 @@ module "example" {
   module_link_uris = ["https://devopsgallerystorage.blob.core.windows.net/packages/xactivedirectory.2.19.0.nupkg", "https://www.powershellgallery.com/api/v2/package/NetworkingDsc/7.3.0.0"]
 
   runbook_enabled           = true
-  runbook_names             = ["tftest${random_string.this.result}"]
+  runbook_names             = ["tftest${random_string.this.result}", "tftest1${random_string.this.result}"]
   runbook_log_verbose       = [true]
   runbook_log_progress      = [true]
   runbook_types             = ["PowerShell"]
