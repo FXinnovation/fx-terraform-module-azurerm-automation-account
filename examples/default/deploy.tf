@@ -39,8 +39,8 @@ module "example" {
   schedule_frequencies        = ["Week"]
   schedule_descriptions       = ["test"]
   schedule_intervals          = [1]
-  schedule_start_times        = ["2020-04-15T18:30:00Z"]
-  schedule_expiry_times       = ["2020-04-15T20:30:00Z"]
+  schedule_start_times        = ["2020-06-15T18:30:00Z"]
+  schedule_expiry_times       = ["2020-06-15T20:30:00Z"]
   schedule_timezones          = ["UTC"]
   schedule_weekdays           = [["Monday", "Friday"]]
 
@@ -54,7 +54,7 @@ module "example" {
   variable_datetime_names              = ["tftestb${random_string.this.result}"]
   variable_datetime_descriptions       = ["Terraform test"]
   variable_datetime_encryptions        = [false]
-  variable_datetime_values             = ["2020-05-24T21:40:54.074Z"]
+  variable_datetime_values             = ["2020-06-24T21:40:54.074Z"]
 
   automation_variable_string_enabled = true
   variable_string_names              = ["tftestc${random_string.this.result}"]
