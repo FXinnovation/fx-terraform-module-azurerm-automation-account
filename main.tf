@@ -70,8 +70,8 @@ resource "azurerm_automation_schedule" "this" {
     for_each = element(var.schedule_frequencies, count.index) == "Month" ? [1] : []
 
     content {
-      day        = element(var.monthly_occurrence_day, count.index)
-      occurrence = element(var.monthly_occurrences, count.index)
+      day        = element(var.monthly_occurrence_days, count.index)
+      occurrence = element(var.monthly_occurrence_occurrences, count.index)
     }
   }
 
@@ -88,9 +88,9 @@ resource "azurerm_automation_job_schedule" "this" {
   schedule_name           = element(var.automation_job_schedule_names, count.index)
   resource_group_name     = var.resource_group_name
   automation_account_name = var.automation_account_exist == false ? element(concat(azurerm_automation_account.this.*.name, list("")), 0) : element(var.existing_automation_account_names, count.index)
-  runbook_name            = element(var.automation_job_runbook_names, count.index)
-  parameters              = element(var.automation_job_parameters, count.index)
-  run_on                  = element(var.automation_job_run_on, count.index)
+  runbook_name            = element(var.automation_job_schedule_runbook_names, count.index)
+  parameters              = element(var.automation_job_schedule_parameters, count.index)
+  run_on                  = element(var.automation_job_schedule_run_on, count.index)
 
   depends_on = [azurerm_automation_schedule.this]
 }
@@ -207,4 +207,48 @@ resource "azurerm_automation_variable_string" "this_string" {
   description             = element(var.variable_string_descriptions, count.index)
   encrypted               = element(var.variable_string_encryptions, count.index)
   value                   = element(var.variable_string_values, count.index)
+}
+
+###
+# Log analytics linked service
+###
+
+resource "azurerm_log_analytics_linked_service" "this" {
+  count = var.enable_update_management ? 1 : 0
+
+  resource_group_name = var.resource_group_name
+  workspace_name      = var.log_analytics_workspace_name
+  linked_service_name = "automation"
+  resource_id         = element(concat(azurerm_automation_account.this.*.id, list("")), 0)
+
+  tags = merge(
+    var.tags,
+    var.linked_service_tags,
+    {
+      "Terraform" = "true"
+    }
+  )
+}
+
+###
+# Log analytics solution
+###
+
+resource "azurerm_log_analytics_solution" "this_solution" {
+  count = var.enable_update_management ? 1 : 0
+
+  resource_group_name   = var.resource_group_name
+  location              = var.location
+  solution_name         = "Updates"
+  workspace_resource_id = var.log_analytics_workspace_id
+  workspace_name        = var.log_analytics_workspace_name
+
+  dynamic "plan" {
+    for_each = var.log_analytics_workspace_id != "" ? [1] : []
+
+    content {
+      publisher = "Microsoft"
+      product   = "OMSGallery/Updates"
+    }
+  }
 }

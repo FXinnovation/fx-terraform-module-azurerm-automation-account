@@ -9,6 +9,13 @@ resource "azurerm_resource_group" "example" {
   location = "West Europe"
 }
 
+resource "azurerm_log_analytics_workspace" "example" {
+  name                = "tftest${random_string.this.result}"
+  location            = azurerm_resource_group.example.location
+  resource_group_name = azurerm_resource_group.example.name
+  sku                 = "PerGB2018"
+}
+
 data "local_file" "this" {
   filename = "${path.root}/runbook/example.ps1"
 }
@@ -73,4 +80,8 @@ module "example" {
   runbook_descriptions      = ["This is test runbook"]
   runbook_contents          = ["${data.local_file.this.content}"]
   publish_content_link_uris = ["https://raw.githubusercontent.com/Azure/azure-quickstart-templates/c4935ffb69246a6058eb24f54640f53f69d3ac9f/101-automation-runbook-getvms/Runbooks/Get-AzureVMTutorial.ps1"]
+
+  enable_update_management     = true
+  log_analytics_workspace_name = azurerm_log_analytics_workspace.example.name
+  log_analytics_workspace_id   = azurerm_log_analytics_workspace.example.id
 }

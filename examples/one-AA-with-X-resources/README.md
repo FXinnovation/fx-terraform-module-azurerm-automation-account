@@ -46,6 +46,5 @@ terraform destroy
 | automation\_variable\_datetime\_ids | n/a |
 | automation\_variable\_int\_ids | n/a |
 | automation\_variable\_string\_ids | n/a |
-| linked\_service\_id | n/a |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

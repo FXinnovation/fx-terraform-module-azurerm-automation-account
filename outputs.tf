@@ -92,3 +92,12 @@ output "automation_account_var_string_ids" {
   description = "Id of the automation acount variable string."
   value       = compact(concat(azurerm_automation_variable_string.this_string.*.id, [""]))
 }
+
+###
+# Log analytics linked service
+###
+
+output "log_analytics_linked_service_id" {
+  description = "the ID of the log analytics linked service."
+  value       = element(concat(azurerm_log_analytics_linked_service.this.*.id, list("")), 0)
+}

@@ -32,15 +32,16 @@ No provider.
 
 | Name | Description |
 |------|-------------|
-| automation\_account\_credential\_ids | IDs of the automation credentials. |
-| automation\_account\_id | ID of the automation account. |
-| automation\_account\_runbook\_ids | IDs of the automation account runbook. |
-| automation\_job\_ids | Ids of the automation job schedule. |
-| automation\_module\_ids | IDs of the automation module. |
-| automation\_schedule\_ids | IDs of the automation schedules. |
-| automation\_variable\_bool\_ids | IDs of the automation account account variable bool. |
-| automation\_variable\_datetime\_ids | Id of the automation acount variable date-time. |
-| automation\_variable\_int\_ids | Id of the automation acount variable int. |
-| automation\_variable\_string\_ids | Id of the automation acount variable string. |
+| automation\_account\_credential\_ids | n/a |
+| automation\_account\_id | n/a |
+| automation\_account\_runbook\_ids | n/a |
+| automation\_job\_ids | n/a |
+| automation\_module\_ids | n/a |
+| automation\_schedule\_ids | n/a |
+| automation\_variable\_bool\_ids | n/a |
+| automation\_variable\_datetime\_ids | n/a |
+| automation\_variable\_int\_ids | n/a |
+| automation\_variable\_string\_ids | n/a |
+| linked\_service\_id | n/a |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
