@@ -426,11 +426,6 @@ variable "log_analytics_workspace_name" {
   default     = ""
 }
 
-variable "linked_service_tags" {
-  description = "Tags which will be associated to log analytics linked service resource."
-  default     = {}
-}
-
 ###
 # Log analytics solution
 ###

@@ -43,7 +43,6 @@ See `examples` folders for usage of this module.
 | enable\_update\_management | Boolean flag which describes whether or not enable the update management on the automation account. | `bool` | `false` | no |
 | enabled | Enable or disable module. | `bool` | `true` | no |
 | existing\_automation\_account\_names | List of names of existing automation account names. If `automation_account_exist` is enabled then this value is `Required`. | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
-| linked\_service\_tags | Tags which will be associated to log analytics linked service resource. | `map` | `{}` | no |
 | location | Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.If enabled value is `Required`. | `string` | `""` | no |
 | log\_analytics\_workspace\_id | The full resource ID of the log analytics workspace with which the solution will be linked. Changing this forces a new resource to be created. If enabled the value is `REQUIRED`. | `string` | `""` | no |
 | log\_analytics\_workspace\_name | Name of the log analytics workspace that will contain the linkedServices resource. Changing this forces a new resource to be created. If enabled the value is `REQUIRED`. | `string` | `""` | no |

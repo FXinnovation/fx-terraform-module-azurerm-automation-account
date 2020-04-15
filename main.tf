@@ -220,14 +220,6 @@ resource "azurerm_log_analytics_linked_service" "this" {
   workspace_name      = var.log_analytics_workspace_name
   linked_service_name = "automation"
   resource_id         = element(concat(azurerm_automation_account.this.*.id, list("")), 0)
-
-  tags = merge(
-    var.tags,
-    var.linked_service_tags,
-    {
-      "Terraform" = "true"
-    }
-  )
 }
 
 ###
