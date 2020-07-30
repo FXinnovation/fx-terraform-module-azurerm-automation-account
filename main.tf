@@ -92,7 +92,7 @@ resource "azurerm_automation_job_schedule" "this" {
   parameters              = element(var.automation_job_schedule_parameters, count.index)
   run_on                  = element(var.automation_job_schedule_run_on, count.index)
 
-  depends_on = [azurerm_automation_schedule.this]
+  depends_on = [azurerm_automation_schedule.this,azurerm_automation_runbook.this_runbook]
 }
 
 ###
